@@ -1,39 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Cadastro</title>
 </head>
+
 <body>
+
     <div>
+
         <section>
             <h1>Crie uma conta nova</h1>
-            <p>Ja tem uma conta? Realize login</p>
+            <p>Já tem uma conta? Faça login.</p>
         </section>
+
         <section>
-            <form>
-                <label>Nome</label><br>
-                <input type="text" id="nome" placeholder="Jõao Molina">
+
+            <form id="formCadastro">
+
+                <!-- NOME -->
+                <label for="nome">Nome:</label><br>
+
+                <input
+                    type="text"
+                    id="nome"
+                    placeholder="João Molina"
+                    required
+                >
+
+                <br><br>
+
+
+                <!-- EMAIL -->
+                <label for="email">Email:</label><br>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="joao@gmail.com"
+                    required
+                >
+
+                <br><br>
+
+
+                <!-- SENHA -->
+                <label for="senha">Senha:</label><br>
+
+                <input
+                    type="password"
+                    id="senha"
+                    placeholder="Digite uma senha..."
+                    required
+                >
+
+                <br><br>
+
+
+                <!-- DATA DE NASCIMENTO -->
+                <label for="dataNascimento">
+                    Data de nascimento:
+                </label><br>
+
+                <input
+                    type="date"
+                    id="dataNascimento"
+                    required
+                >
+
+                <br><br>
+
+
+                <!-- BOTÃO -->
+                <button type="submit">
+                    Cadastrar
+                </button>
+
             </form>
-            <br>
-            <form>
-                <label for="email">Email:</labeL><br>
-                        <input type="email" id="email" name="email" placeholder="joao.molina123@gmail.com"><br><br>
-            </form>
-            <form> <!--serve pra criar uma pagina "formulario" onde o usuario possa inserir dados-->
-                <label for="'senha">Senha:</label><br>
-                    <input type="password" id="p3" name="pergunta3" placeholder="Digite uma senha...">
-            </form>
-            <br>
-            <form>
-                <label>Data de nascimento</label><br>
-                <input type="date" id="p4" name="pergunta4">
-            </form>
-            
-            <br><br>
-            <button>Cadastrar</button>
+
         </section>
+
     </div>
+
+
+    <script>
+
+        // Formulário de cadastro
+        document
+            .getElementById("formCadastro")
+            .addEventListener("submit", function(event) {
+
+                // Impede o formulário de recarregar
+                event.preventDefault();
+
+
+                // Pega os valores digitados
+                const nome =
+                    document.getElementById("nome").value;
+
+                const email =
+                    document.getElementById("email").value;
+
+                const senha =
+                    document.getElementById("senha").value;
+
+                const dataNascimento =
+                    document.getElementById("dataNascimento").value;
+
+
+                // Salva os dados no localStorage
+                localStorage.setItem("nome", nome);
+                localStorage.setItem("email", email);
+                localStorage.setItem("senha", senha);
+                localStorage.setItem(
+                    "dataNascimento",
+                    dataNascimento
+                );
+
+
+                // Mensagem
+                alert("Cadastro realizado com sucesso!");
+
+
+                // Vai para o Login
+                window.location.href = "login.html";
+
+            });
+
+    </script>
+
 </body>
+
 </html>

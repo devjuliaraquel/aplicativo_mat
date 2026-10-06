@@ -1,31 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Login</title>
+
 </head>
+
 <body>
+
     <div>
+
         <section>
+
             <h1>Login</h1>
-            <p> Faça login para continuar</p>
+
+            <p>
+                Faça login para continuar
+            </p>
+
         </section>
+
+
         <section>
-            <form>
-                <label for="email">Email:</labeL><br>
-                        <input type="email" id="email" name="email"><!-- type email verifica se é um email mesmo--><br><br>
+
+            <form id="formLogin">
+
+
+                <!-- EMAIL -->
+                <label for="email">
+                    Email:
+                </label><br>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Digite seu email..."
+                    required
+                >
+
+                <br><br>
+
+
+                <!-- SENHA -->
+                <label for="senha">
+                    Senha:
+                </label><br>
+
+                <input
+                    type="password"
+                    id="senha"
+                    placeholder="Digite sua senha..."
+                    required
+                >
+
+                <br><br>
+
+
+                <!-- LEMBRAR -->
+                <input
+                    type="checkbox"
+                    id="salvamento_automatico"
+                >
+
+                <label for="salvamento_automatico">
+                    Lembre-se de mim
+                </label>
+
+                <br><br>
+
+
+                <!-- ENTRAR -->
+                <button type="submit">
+                    Entrar
+                </button>
+
+
             </form>
-            <form> <!--serve pra criar uma pagina "formulario" onde o usuario possa inserir dados-->
-                <label for="'senha">Senha:</label><br>
-                    <input type="password" id="p3" name="pergunta3" placeholder="Digite uma senha...">
-            </form>
-            <br>
-            <input type="checkbox" id="salvamento_automatico">
-            <label for="salvamento_automatico">Lembre-se de mim</label>
-            <br><br>
-            <button>Login</button>
+
         </section>
+
     </div>
+
+
+    <script>
+
+
+        // Quando a página carregar
+        window.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                // Procura o email salvo
+                const emailSalvo =
+                    localStorage.getItem("email");
+
+
+                // Se existir um email salvo
+                if (emailSalvo) {
+
+                    document.getElementById(
+                        "email"
+                    ).value = emailSalvo;
+
+                    document.getElementById(
+                        "salvamento_automatico"
+                    ).checked = true;
+
+                }
+
+            }
+        );
+
+
+        // Formulário de login
+        document
+            .getElementById("formLogin")
+            .addEventListener(
+                "submit",
+                function(event) {
+
+                    // Impede recarregar a página
+                    event.preventDefault();
+
+
+                    // Pega o que o usuário digitou
+                    const emailDigitado =
+                        document.getElementById(
+                            "email"
+                        ).value;
+
+                    const senhaDigitada =
+                        document.getElementById(
+                            "senha"
+                        ).value;
+
+
+                    // Pega os dados cadastrados
+                    const emailCadastrado =
+                        localStorage.getItem(
+                            "email"
+                        );
+
+                    const senhaCadastrada =
+                        localStorage.getItem(
+                            "senha"
+                        );
+
+
+                    // Verifica email e senha
+                    if (
+                        emailDigitado === emailCadastrado &&
+                        senhaDigitada === senhaCadastrada
+                    ) {
+
+                        // Cria a sessão do usuário
+                        sessionStorage.setItem(
+                            "logado",
+                            "true"
+                        );
+
+
+                        // Salva ou remove o email
+                        const lembrar =
+                            document.getElementById(
+                                "salvamento_automatico"
+                            ).checked;
+
+
+                        if (lembrar) {
+
+                            localStorage.setItem(
+                                "email",
+                                emailDigitado
+                            );
+
+                        } else {
+
+                            localStorage.removeItem(
+                                "email"
+                            );
+
+                        }
+
+
+                        alert(
+                            "Login realizado com sucesso!"
+                        );
+
+
+                        // Vai para a Dashboard
+                        window.location.href =
+                            "pagina_login.html";
+
+
+                    } else {
+
+                        alert(
+                            "Email ou senha incorretos!"
+                        );
+
+                    }
+
+                }
+            );
+
+    </script>
+
 </body>
+
 </html>
